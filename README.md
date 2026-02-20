@@ -44,25 +44,32 @@ We redesigned the process using **task parallelism** with a pipeline pattern:
 
 Each worker specializes in one stage, and dishes flow through the pipeline continuously. This also incorporates **data parallelism** as multiple dishes are processed simultaneously at each stage.
 
+## Code Structure
+
+### sequential_dishwashing.py
+- Implements single-threaded dishwashing process
+- One worker processes all dishes through all stages
+- Baseline for performance comparison
+
+**Key Features:**
+- Simple, linear workflow
+- No synchronization needed
+- Predictable execution pattern
+
+### parallel_dishwashing.py
+- Implements multi-threaded pipeline architecture
+- Four worker threads processing different stages concurrently
+- Thread-safe queues for inter-stage communication
+
+**Key Features:**
+- Pipeline pattern with 4 stages
+- Synchronized queues (critical sections)
+- Concurrent processing of multiple dishes
+
+### quic_test.py (the benchmark)
+- Runs both implementations multiple times
+- Calculates average execution times
+- Computes speedup and efficiency metrics
+- Generates comprehensive performance report
+
 ---
-
-## Project Structure
-
-```
-parallel-computing-challenge/
-├── README.md                           # This file
-├── Parallel_Computing_Documentation.docx  # Complete project documentation
-├── sequential_dishwashing.py           # Sequential implementation
-├── parallel_dishwashing.py             # Parallel pipeline implementation
-├── benchmark.py                        # Performance comparison script
-├── benchmark_results.txt               # Saved benchmark results
-└── flowchart.png                       # System architecture diagram
-```
-
----
-
-## Installation & Requirements
-
-### Prerequisites
-- Python 3.7 or higher
-- No external dependencies required (uses standard library only)
